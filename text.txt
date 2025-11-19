@@ -53,3 +53,16 @@ docker build -t student_list:v1 .
 docker tag student_list:v1 abdelnour46/student_list:v1
 
 docker push abdelnour46/student_list:v1
+
+
+---->f github
+t cree repositery menb3ed teba3 chaykon madelak howa f page tahom mor ma t connecter m3a github ta3ak 
+fel page lawla ta3ak rah yban fichier README.md howa liykon tban b discription lirak dayerha f dak fichier ana lkhasni n badelo
+
+yela seraw des changement f projet nedir haka :
+git status
+git add .
+Ou pour ajouter des fichiers spécifiques : git add chemin/vers/fichier
+git commit -m "Description des modifications" --> commainetaire 
+git remote -v --> Assure-toi que ton dépôt GitHub est bien configuré comme distant
+git push origin main --> Pour envoyer tes commits sur GitHub
