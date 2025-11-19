@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+
+  api:
+    image: student_list:v1        # ton image Flask déjà construite
+    container_name: api-student
+    ports:
+      - "5000:5000"               # exposer le port 5000
+    volumes:
+      - ./data:/data   # monte le dossier entier
+
+    environment:
+      - USERNAME=toto
+      - PASSWORD=python
+    restart: unless-stopped
+
+  web:
+    image: php:apache
+    container_name: web-student
+    depends_on:
+      - api                        # démarre après l'API
+    ports:
+      - "8080:80"                  # exposer le port 8080 pour le site web
+    volumes:
+      - ./website:/var/www/html    # monter le code PHP/HTML
+    environment:
+      - USERNAME=toto
+      - PASSWORD=python
+    restart: unless-stopped
+
+# Réseau interne (optionnel, pour communication entre services)
+networks:
+  default:
+    driver: bridge

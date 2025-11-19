@@ -1,0 +1,55 @@
+---->dockerfile ---------------
+docker build -t student_list:v1 .
+
+docker run -d -p 5000:5000 -v ${PWD}\student_age.json:/data/student_age.json --name api-student student_list:v1
+
+docker ps --> ykon khedam
+
+http://localhost:5000/pozos/api/v1.0/get_student_ages
+
+curl.exe -u toto:python -X GET http://localhost:5000/pozos/api/v1.0/get_student_ages
+
+
+---->docker-compose -------------
+docker-compose up -d --build
+
+docker-compose ps
+
+Ouvre ton navigateur → http://localhost:8080 → clique sur Liste des étudiants.
+
+curl.exe -u toto:python -X GET http://localhost:5000/pozos/api/v1.0/get_student_ages
+
+
+docker restart <nom_du_conteneur_ou_ID>
+docker restart api-student
+docker restart web-student
+
+
+
+---->docker registry
+docker build -t student_list:v1 .
+
+Tu tagues cette image pour ton registre local : docker tag student_list:v1 localhost:5000/student_list:v1
+localhost:5000 → ton registre privé local
+student_list:v1 → le nom + tag de ton image
+
+Tu pousses l’image vers ton registre : docker push localhost:5000/student_list:v1
+
+Tu peux tirer cette image depuis n’importe quelle machine qui a accès à ce registre : docker pull localhost:5000/student_list:v1
+
+Visualiser ton registre:
+Comme tu l’as fait, ton registre local fonctionne sur : http://localhost:5000
+Mais Docker Desktop ne te montre pas les images stockées dans ce registre.
+Pour ça, tu peux utiliser : 
+CLI : curl http://localhost:5000/v2/_catalog
+UI : lancer un front-end web pour Docker Registry comme je t’ai montré avant.
+
+
+---->docker hub
+docker login
+
+docker build -t student_list:v1 .
+
+docker tag student_list:v1 abdelnour46/student_list:v1
+
+docker push abdelnour46/student_list:v1
